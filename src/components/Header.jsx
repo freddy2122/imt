@@ -52,14 +52,6 @@ function SearchIcon() {
   );
 }
 
-function LinkedInIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-      <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-.98 1.83-2 3.77-2 4.03 0 4.78 2.5 4.78 5.76V21H18v-5.9c0-1.4-.02-3.2-2-3.2-2 0-2.3 1.5-2.3 3.1V21H10V9Z" />
-    </svg>
-  );
-}
-
 function AnnounceGroup({ ariaHidden }) {
   return (
     <div className="frases" aria-hidden={ariaHidden || undefined}>
@@ -123,8 +115,8 @@ export default function Header() {
           </button>
         </div>
 
-        <a href="#" className="linkedin-btn" aria-label="LinkedIn">
-          <LinkedInIcon />
+        <a href="/imt-online" className="imt-online-btn imt-online-btn--mobile" target="_blank" rel="noreferrer">
+          IMT ONLINE
         </a>
       </div>
 

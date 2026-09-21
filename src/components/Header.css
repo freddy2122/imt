@@ -138,10 +138,9 @@
   padding: 4px;
 }
 
-.linkedin-btn {
-  color: var(--text-dark);
-  display: flex;
-  align-items: center;
+.imt-online-btn--mobile {
+  display: none;
+  margin-left: auto;
 }
 
 /* Sub nav */
@@ -177,5 +176,16 @@
   .top-links,
   .search-box {
     display: none;
+  }
+
+  .sub-nav-border {
+    display: none;
+  }
+
+  .imt-online-btn--mobile {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 16px;
+    font-size: 13px;
   }
 }
