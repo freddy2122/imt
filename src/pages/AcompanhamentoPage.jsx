@@ -27,18 +27,18 @@ const CATEGORIAS_CARTA = [
 function EuBadge() {
   const stars = Array.from({ length: 12 }, (_, i) => {
     const angle = (i / 12) * 2 * Math.PI - Math.PI / 2;
-    return { x: 20 + 9 * Math.cos(angle), y: 15 + 9 * Math.sin(angle) };
+    return { x: 18 + 12.5 * Math.cos(angle), y: 18 + 12.5 * Math.sin(angle) };
   });
 
   return (
-    <svg viewBox="0 0 40 34" className="carta-card__eu-badge" aria-hidden="true">
-      <rect width="40" height="34" rx="2" fill="#003399" />
+    <svg viewBox="0 0 36 36" className="carta-card__eu-badge" aria-hidden="true">
+      <rect width="36" height="36" rx="4" fill="#003399" />
       {stars.map((s, i) => (
-        <text key={i} x={s.x} y={s.y} fontSize="4.5" fill="#ffcc00" textAnchor="middle" dominantBaseline="middle">
+        <text key={i} x={s.x} y={s.y} fontSize="4.6" fill="#ffcc00" textAnchor="middle" dominantBaseline="middle">
           ★
         </text>
       ))}
-      <text x="20" y="16" fontSize="11" fill="#fff" textAnchor="middle" dominantBaseline="middle" fontWeight="700">
+      <text x="18" y="19" fontSize="15" fill="#fff" textAnchor="middle" dominantBaseline="middle" fontWeight="700">
         P
       </text>
     </svg>
@@ -214,6 +214,10 @@ export default function AcompanhamentoPage() {
 
                       <div className="acomp__slide acomp__slide-carta">
                         <div className="carta-card carta-card--frente">
+                          <span className="carta-card__watermark" aria-hidden="true">
+                            🇵🇹
+                          </span>
+
                           <div className="carta-card__doc-header">
                             <EuBadge />
                             <h3 className="carta-card__doc-title">
@@ -223,9 +227,6 @@ export default function AcompanhamentoPage() {
 
                           <div className="carta-card__main">
                             <div className="carta-card__photo">
-                              <span className="carta-card__photo-watermark" aria-hidden="true">
-                                🇵🇹
-                              </span>
                               {dossier.foto_url ? <img src={dossier.foto_url} alt={dossier.nome} /> : <span className="carta-card__photo-empty" />}
                             </div>
 

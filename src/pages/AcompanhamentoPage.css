@@ -188,7 +188,8 @@
 }
 
 .carta-card {
-  width: 340px;
+  position: relative;
+  width: 380px;
   border-radius: 8px;
   box-shadow: 0 3px 10px rgba(12, 43, 89, 0.15);
   background: #f5dde3;
@@ -202,9 +203,25 @@
   border: 1px solid #e6bfc8;
   flex: 0 0 auto;
   box-sizing: border-box;
+  overflow: hidden;
+}
+
+.carta-card__watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  font-size: 190px;
+  line-height: 1;
+  opacity: 0.1;
+  filter: grayscale(1) contrast(1.3);
+  transform: translate(-50%, -50%) rotate(-14deg);
+  pointer-events: none;
 }
 
 .carta-card__doc-header {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -221,11 +238,12 @@
 
 .carta-card__doc-title {
   margin: 0;
-  font-size: 11px;
+  font-size: 9.5px;
   font-weight: 700;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.1px;
   color: #1d3a6e;
   line-height: 1.3;
+  white-space: nowrap;
 }
 
 .carta-card__doc-title-sep {
@@ -235,6 +253,8 @@
 }
 
 .carta-card__main {
+  position: relative;
+  z-index: 1;
   display: flex;
   gap: 10px;
   padding: 0 12px 6px;
@@ -264,21 +284,6 @@
   display: block;
   width: 100%;
   height: 100%;
-}
-
-.carta-card__photo-watermark {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 46px;
-  line-height: 1;
-  opacity: 0.22;
-  filter: grayscale(1) contrast(1.2);
-  transform: rotate(-10deg) scale(1.3);
-  pointer-events: none;
 }
 
 .carta-card__fields-list {
@@ -329,6 +334,8 @@
 }
 
 .carta-card__categorias-line {
+  position: relative;
+  z-index: 1;
   padding: 0 12px 10px;
 }
 
