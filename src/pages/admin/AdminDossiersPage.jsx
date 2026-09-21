@@ -25,6 +25,8 @@ export default function AdminDossiersPage() {
   const [form, setForm] = useState(EMPTY_FORM);
   const [foto, setFoto] = useState(null);
   const [fotoPreview, setFotoPreview] = useState(null);
+  const [assinatura, setAssinatura] = useState(null);
+  const [assinaturaPreview, setAssinaturaPreview] = useState(null);
   const [creating, setCreating] = useState(false);
   const [createResult, setCreateResult] = useState(null);
   const [createError, setCreateError] = useState("");
@@ -40,6 +42,12 @@ export default function AdminDossiersPage() {
     };
   }, [fotoPreview]);
 
+  useEffect(() => {
+    return () => {
+      if (assinaturaPreview) URL.revokeObjectURL(assinaturaPreview);
+    };
+  }, [assinaturaPreview]);
+
   async function loadDossiers() {
     setListLoading(true);
     const { data, error } = await supabase.from("dossiers").select("*").order("criado_em", { ascending: false });
@@ -54,6 +62,20 @@ export default function AdminDossiersPage() {
     setFotoPreview(URL.createObjectURL(file));
   }
 
+  function handleAssinaturaChange(e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setAssinatura(file);
+    setAssinaturaPreview(URL.createObjectURL(file));
+  }
+
+  async function uploadArquivo(file) {
+    const path = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.]/g, "_")}`;
+    const { error: uploadError } = await supabase.storage.from("fotos").upload(path, file);
+    if (uploadError) throw uploadError;
+    return supabase.storage.from("fotos").getPublicUrl(path).data.publicUrl;
+  }
+
   async function handleCreate(e) {
     e.preventDefault();
     setCreating(true);
@@ -61,15 +83,14 @@ export default function AdminDossiersPage() {
     setCreateResult(null);
 
     let foto_url = null;
-    if (foto) {
-      const path = `${Date.now()}-${foto.name.replace(/[^a-zA-Z0-9.]/g, "_")}`;
-      const { error: uploadError } = await supabase.storage.from("fotos").upload(path, foto);
-      if (uploadError) {
-        setCreateError("Falha ao enviar a foto: " + uploadError.message);
-        setCreating(false);
-        return;
-      }
-      foto_url = supabase.storage.from("fotos").getPublicUrl(path).data.publicUrl;
+    let assinatura_url = null;
+    try {
+      if (foto) foto_url = await uploadArquivo(foto);
+      if (assinatura) assinatura_url = await uploadArquivo(assinatura);
+    } catch (uploadError) {
+      setCreateError("Falha ao enviar o ficheiro: " + uploadError.message);
+      setCreating(false);
+      return;
     }
 
     const { data, error } = await supabase
@@ -81,6 +102,7 @@ export default function AdminDossiersPage() {
           data_emissao: form.data_emissao || null,
           data_validade: form.data_validade || null,
           foto_url,
+          assinatura_url,
         },
       ])
       .select()
@@ -102,6 +124,8 @@ export default function AdminDossiersPage() {
     setForm(EMPTY_FORM);
     setFoto(null);
     setFotoPreview(null);
+    setAssinatura(null);
+    setAssinaturaPreview(null);
     setCreating(false);
     loadDossiers();
   }
@@ -134,6 +158,12 @@ export default function AdminDossiersPage() {
                 <input type="file" accept="image/*" onChange={handleFotoChange} hidden />
               </label>
               <span className="admin__photo-hint">Format type passe (35×45mm)</span>
+
+              <label className="admin__signature-box">
+                {assinaturaPreview ? <img src={assinaturaPreview} alt="Aperçu signature" /> : <span>Signature</span>}
+                <input type="file" accept="image/*" onChange={handleAssinaturaChange} hidden />
+              </label>
+              <span className="admin__photo-hint">Image de la signature (fond transparent recommandé)</span>
             </div>
 
             <div className="admin__grid">

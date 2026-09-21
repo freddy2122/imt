@@ -18,6 +18,7 @@ create table if not exists public.dossiers (
   data_validade date,
   numero_carta text,
   foto_url text,
+  assinatura_url text,
   estado text not null default 'inscrito'
     check (estado in (
       'inscrito',
@@ -92,6 +93,7 @@ returns table (
   apelido text,
   categoria_carta text,
   foto_url text,
+  assinatura_url text,
   data_nascimento date,
   local_nascimento text,
   data_emissao date,
@@ -107,7 +109,7 @@ security definer
 set search_path = public
 as $$
   select
-    d.codigo, d.nome, d.apelido, d.categoria_carta, d.foto_url,
+    d.codigo, d.nome, d.apelido, d.categoria_carta, d.foto_url, d.assinatura_url,
     d.data_nascimento, d.local_nascimento, d.data_emissao, d.data_validade, d.numero_carta,
     d.estado, d.pontos, d.criado_em, d.atualizado_em
   from public.dossiers d

@@ -214,55 +214,69 @@ export default function AcompanhamentoPage() {
 
                       <div className="acomp__slide acomp__slide-carta">
                         <div className="carta-card carta-card--frente">
-                          <div className="carta-card__topbar">
+                          <div className="carta-card__doc-header">
                             <EuBadge />
-                            <div className="carta-card__title">
-                              <strong>CARTA DE CONDUÇÃO</strong>
-                              <span>República Portuguesa</span>
-                            </div>
+                            <h3 className="carta-card__doc-title">
+                              CARTA DE CONDUÇÃO <span className="carta-card__doc-title-sep">|</span> REPÚBLICA PORTUGUESA
+                            </h3>
                           </div>
-                          <div className="carta-card__body">
-                            <dl className="carta-card__fields">
-                              <div>
-                                <dt>1. Apelido</dt>
-                                <dd>{dossier.apelido || "—"}</dd>
-                              </div>
-                              <div>
-                                <dt>2. Nome</dt>
-                                <dd>{dossier.nome}</dd>
-                              </div>
-                              <div>
-                                <dt>3. Data e local de nascimento</dt>
-                                <dd>
-                                  {dossier.data_nascimento ? new Date(dossier.data_nascimento).toLocaleDateString("pt-PT") : "—"}
-                                  {dossier.local_nascimento ? ` — ${dossier.local_nascimento}` : ""}
-                                </dd>
-                              </div>
-                              <div>
-                                <dt>4a. Emissão / 4b. Validade</dt>
-                                <dd>
-                                  {dossier.data_emissao ? new Date(dossier.data_emissao).toLocaleDateString("pt-PT") : "—"}
-                                  {" / "}
-                                  {dossier.data_validade ? new Date(dossier.data_validade).toLocaleDateString("pt-PT") : "—"}
-                                </dd>
-                              </div>
-                              <div>
-                                <dt>4c. Entidade emissora</dt>
-                                <dd>IMT, I.P.</dd>
-                              </div>
-                              <div>
-                                <dt>5. Número</dt>
-                                <dd>{dossier.numero_carta || "—"}</dd>
-                              </div>
-                            </dl>
 
+                          <div className="carta-card__main">
                             <div className="carta-card__photo">
-                              {dossier.foto_url ? <img src={dossier.foto_url} alt={dossier.nome} /> : <span />}
+                              <span className="carta-card__photo-watermark" aria-hidden="true">
+                                🇵🇹
+                              </span>
+                              {dossier.foto_url ? <img src={dossier.foto_url} alt={dossier.nome} /> : <span className="carta-card__photo-empty" />}
+                            </div>
+
+                            <div className="carta-card__fields-list">
+                              <p className="carta-card__field">
+                                <b>1.</b> {dossier.apelido || "—"}
+                              </p>
+                              <p className="carta-card__field">
+                                <b>2.</b> {dossier.nome}
+                              </p>
+                              <p className="carta-card__field">
+                                <b>3.</b>{" "}
+                                {dossier.data_nascimento ? new Date(dossier.data_nascimento).toLocaleDateString("pt-PT") : "—"}
+                                {dossier.local_nascimento ? ` ${dossier.local_nascimento}` : ""}
+                              </p>
+                              <div className="carta-card__field-pair">
+                                <p className="carta-card__field">
+                                  <b>4a.</b> {dossier.data_emissao ? new Date(dossier.data_emissao).toLocaleDateString("pt-PT") : "—"}
+                                </p>
+                                <p className="carta-card__field">
+                                  <b>4c.</b> IMT
+                                </p>
+                              </div>
+                              <div className="carta-card__field-pair">
+                                <p className="carta-card__field">
+                                  <b>4b.</b> {dossier.data_validade ? new Date(dossier.data_validade).toLocaleDateString("pt-PT") : "—"}
+                                </p>
+                                <p className="carta-card__field">
+                                  <b>4d.</b> —
+                                </p>
+                              </div>
+                              <p className="carta-card__field">
+                                <b>5.</b> {dossier.numero_carta || "—"}
+                              </p>
+                              <p className="carta-card__field carta-card__field--signature">
+                                <b>7.</b>{" "}
+                                {dossier.assinatura_url ? (
+                                  <img className="carta-card__signature-img" src={dossier.assinatura_url} alt="Assinatura" />
+                                ) : (
+                                  <span className="carta-card__signature-text">{dossier.nome}</span>
+                                )}
+                              </p>
+                              <p className="carta-card__field">
+                                <b>8.</b> —
+                              </p>
                             </div>
                           </div>
-                          <div className="carta-card__categorias">
-                            9. {[...categoriasPosuidas].join(" · ") || "—"}
-                          </div>
+
+                          <p className="carta-card__field carta-card__categorias-line">
+                            <b>9.</b> {[...categoriasPosuidas].join(", ") || "—"}
+                          </p>
                         </div>
 
                         <div className="carta-card carta-card--verso">

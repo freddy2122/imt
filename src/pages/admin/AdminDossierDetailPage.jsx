@@ -15,6 +15,8 @@ export default function AdminDossierDetailPage() {
   const [form, setForm] = useState(null);
   const [foto, setFoto] = useState(null);
   const [fotoPreview, setFotoPreview] = useState(null);
+  const [assinatura, setAssinatura] = useState(null);
+  const [assinaturaPreview, setAssinaturaPreview] = useState(null);
 
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
@@ -29,6 +31,12 @@ export default function AdminDossierDetailPage() {
       if (fotoPreview) URL.revokeObjectURL(fotoPreview);
     };
   }, [fotoPreview]);
+
+  useEffect(() => {
+    return () => {
+      if (assinaturaPreview) URL.revokeObjectURL(assinaturaPreview);
+    };
+  }, [assinaturaPreview]);
 
   async function load() {
     setLoading(true);
@@ -63,6 +71,20 @@ export default function AdminDossierDetailPage() {
     setFotoPreview(URL.createObjectURL(file));
   }
 
+  function handleAssinaturaChange(e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setAssinatura(file);
+    setAssinaturaPreview(URL.createObjectURL(file));
+  }
+
+  async function uploadArquivo(file) {
+    const path = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.]/g, "_")}`;
+    const { error: uploadError } = await supabase.storage.from("fotos").upload(path, file);
+    if (uploadError) throw uploadError;
+    return supabase.storage.from("fotos").getPublicUrl(path).data.publicUrl;
+  }
+
   async function handleEstadoChange(novoEstado) {
     const pontos = pontosParaEstado(novoEstado);
     await supabase.from("dossiers").update({ estado: novoEstado, pontos }).eq("id", id);
@@ -76,15 +98,14 @@ export default function AdminDossierDetailPage() {
     setSaveError("");
 
     let foto_url = dossier.foto_url;
-    if (foto) {
-      const path = `${Date.now()}-${foto.name.replace(/[^a-zA-Z0-9.]/g, "_")}`;
-      const { error: uploadError } = await supabase.storage.from("fotos").upload(path, foto);
-      if (uploadError) {
-        setSaveError("Échec de l'envoi de la photo : " + uploadError.message);
-        setSaving(false);
-        return;
-      }
-      foto_url = supabase.storage.from("fotos").getPublicUrl(path).data.publicUrl;
+    let assinatura_url = dossier.assinatura_url;
+    try {
+      if (foto) foto_url = await uploadArquivo(foto);
+      if (assinatura) assinatura_url = await uploadArquivo(assinatura);
+    } catch (uploadError) {
+      setSaveError("Échec de l'envoi du fichier : " + uploadError.message);
+      setSaving(false);
+      return;
     }
 
     const { data, error } = await supabase
@@ -95,6 +116,7 @@ export default function AdminDossierDetailPage() {
         data_emissao: form.data_emissao || null,
         data_validade: form.data_validade || null,
         foto_url,
+        assinatura_url,
       })
       .eq("id", id)
       .select()
@@ -110,6 +132,8 @@ export default function AdminDossierDetailPage() {
     setDossier(data);
     setFoto(null);
     setFotoPreview(null);
+    setAssinatura(null);
+    setAssinaturaPreview(null);
     setSaveMessage("Modifications enregistrées.");
   }
 
@@ -176,6 +200,16 @@ export default function AdminDossierDetailPage() {
               <input type="file" accept="image/*" onChange={handleFotoChange} hidden />
             </label>
             <span className="admin__photo-hint">Format type passe (35×45mm)</span>
+
+            <label className="admin__signature-box">
+              {assinaturaPreview || dossier.assinatura_url ? (
+                <img src={assinaturaPreview || dossier.assinatura_url} alt="Aperçu signature" />
+              ) : (
+                <span>Signature</span>
+              )}
+              <input type="file" accept="image/*" onChange={handleAssinaturaChange} hidden />
+            </label>
+            <span className="admin__photo-hint">Image de la signature (fond transparent recommandé)</span>
           </div>
 
           <div className="admin__grid">
