@@ -1,0 +1,47 @@
+.imt-mais {
+  background: #f5f5f5;
+  padding: 96px 0 48px;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.imt-mais__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+.imt-mais__heading {
+  color: #4a4a68;
+  font-weight: 400;
+  font-size: 40px;
+  text-transform: uppercase;
+  padding: 8px 0;
+  margin: 0 0 8px;
+}
+
+.imt-mais__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 900px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.imt-mais__logo {
+  display: block;
+  padding: 0 12px;
+}
+
+.imt-mais__logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 900px) {
+  .imt-mais__grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    gap: 24px;
+  }
+}

@@ -1,0 +1,81 @@
+.politicas {
+  background: #f5f5f5;
+  padding: 48px 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.politicas__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+.politicas__heading {
+  color: #4a4a68;
+  font-weight: 400;
+  font-size: 40px;
+  text-transform: uppercase;
+  padding: 8px 0;
+  margin: 0 0 8px;
+}
+
+.politicas__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  padding-bottom: 24px;
+}
+
+.politicas__card {
+  position: relative;
+  padding: 0 12px;
+}
+
+.politicas__image {
+  display: block;
+  border-bottom: 8px solid #0053cc;
+}
+
+.politicas__image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 21 / 20;
+  object-fit: cover;
+}
+
+.politicas__box {
+  position: absolute;
+  left: 12px;
+  bottom: 8px;
+  max-width: 70%;
+  width: 100%;
+  background: #fff;
+  padding: 24px;
+}
+
+.politicas__box h3 {
+  margin: 0 0 48px;
+  color: #0053cc;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.politicas__box a {
+  color: #0053cc;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.politicas__box a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .politicas__grid {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+}

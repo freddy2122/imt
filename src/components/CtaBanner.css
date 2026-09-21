@@ -1,0 +1,40 @@
+.cta-banner {
+  background-image: url("https://www.imt-ip.pt/wp-content/uploads/2024/12/background-call-to-actions.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 48px 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.cta-banner__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 12px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.cta-banner__card {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px;
+  text-decoration: none;
+}
+
+.cta-banner__card h3 {
+  margin: 0;
+  color: #0c2b59;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .cta-banner__inner {
+    grid-template-columns: 1fr;
+  }
+}

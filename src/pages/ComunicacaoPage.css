@@ -1,0 +1,12 @@
+.comms-linkedin {
+  background: #0c2b59;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 12px;
+  text-align: center;
+}
+
+.comms-linkedin img {
+  max-width: 100%;
+  height: auto;
+}

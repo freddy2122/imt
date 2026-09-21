@@ -1,0 +1,113 @@
+.carousel {
+  position: relative;
+  overflow: hidden;
+  background: #6ea8dc;
+}
+
+.carousel__track {
+  display: flex;
+  transition: transform 0.6s ease;
+}
+
+.carousel__slide {
+  flex: none;
+  width: 100%;
+  min-height: 460px;
+  background-size: cover;
+  background-position: 0% 0%;
+  display: flex;
+  align-items: center;
+}
+
+.carousel__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 12px;
+  position: relative;
+}
+
+.carousel__badge {
+  position: absolute;
+  top: -40px;
+  left: 12px;
+  background: #00aeef;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 8px 16px;
+  white-space: nowrap;
+}
+
+.carousel__card {
+  position: relative;
+  background: #fff;
+  max-width: 650px;
+  padding: 16px;
+}
+
+.carousel__card h2 {
+  margin: 0;
+  color: #0053cc;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-weight: 700;
+  font-size: clamp(24px, 2.8vw, 40px);
+  line-height: 1.2;
+  padding-right: 72px;
+}
+
+.carousel__arrow {
+  position: absolute;
+  right: -72px;
+  bottom: 0;
+  width: 72px;
+  height: 72px;
+  background: #0053cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel__arrow:hover {
+  background: #0047b3;
+}
+
+.carousel__dots {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.carousel__dot {
+  width: 40px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.carousel__dot.is-selected {
+  background: #fff;
+}
+
+@media (max-width: 720px) {
+  .carousel__slide {
+    min-height: 560px;
+    align-items: flex-end;
+    padding-bottom: 48px;
+  }
+
+  .carousel__card {
+    max-width: 100%;
+  }
+
+  .carousel__arrow {
+    right: 0;
+    bottom: -72px;
+  }
+}

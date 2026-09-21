@@ -1,0 +1,125 @@
+.faq {
+  background: #fff;
+  padding: 48px 0 80px;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.faq__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+.faq__intro {
+  color: #4a4a68;
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 980px;
+  margin: 0 0 32px;
+}
+
+.faq__dropdown {
+  position: relative;
+  width: 300px;
+  max-width: 100%;
+  margin-bottom: 32px;
+}
+
+.faq__dropbtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #fff;
+  color: #0c2b59;
+  font-size: 22.4px;
+  font-weight: 700;
+  padding: 16px;
+  border: 1px solid #0c2b59;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.faq__dropcontent {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: #f9f9f9;
+  max-height: 340px;
+  overflow-y: auto;
+  border: 1px solid #dee2e6;
+  border-top: none;
+}
+
+.faq__dropcontent a {
+  display: block;
+  background: #0c2b59;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.faq__dropcontent a:hover {
+  background: #0053cc;
+}
+
+.faq__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 980px;
+}
+
+.faq__empty {
+  color: #4a4a68;
+  font-size: 16px;
+}
+
+.faq__item {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.faq__question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-align: left;
+  background: rgba(0, 68, 111, 0.1);
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 16px;
+  font-weight: 400;
+  padding: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.faq__question svg {
+  flex: none;
+  color: #0c2b59;
+}
+
+.faq__question.is-open {
+  border-radius: 8px 8px 0 0;
+}
+
+.faq__answer {
+  background: #fff;
+  color: #4a4a68;
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 16px;
+  border: 1px solid rgba(0, 68, 111, 0.1);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  white-space: pre-line;
+}

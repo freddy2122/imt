@@ -1,0 +1,37 @@
+.article {
+  background: #fff;
+  padding: 48px 0 80px;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.article__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+.article__inner h2 {
+  color: #4a4a68;
+  font-weight: 700;
+  font-size: 28px;
+  margin: 0 0 20px;
+}
+
+.article__inner h3 {
+  color: #4a4a68;
+  font-weight: 700;
+  font-size: 20px;
+  margin: 32px 0 12px;
+}
+
+.article__inner p {
+  color: #4a4a68;
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0 0 16px;
+}
+
+.article__inner .accordion-list {
+  margin-top: 24px;
+  max-width: 900px;
+}
